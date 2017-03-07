@@ -52,7 +52,7 @@ public final class QueryUtils {
     /**
      * Query the USGS dataset and return a list of {@link Gitlagos} objects.
      */
-    public static List<Gitlagos> fetchEarthquakeData(String requestUrl) {
+    public static List<Gitlagos> fetchGitlagosData(String requestUrl) {
         // Create URL object
         URL url = createUrl(requestUrl);
 
@@ -150,9 +150,9 @@ public final class QueryUtils {
      * Return a list of {@link Gitlagos} objects that has been built up from
      * parsing the given JSON response.
      */
-    private static List<Gitlagos> extractFeatureFromJson(String earthquakeJSON) {
+    private static List<Gitlagos> extractFeatureFromJson(String gitlagosJSON) {
         // If the JSON string is empty or null, then return early.
-        if (TextUtils.isEmpty(earthquakeJSON)) {
+        if (TextUtils.isEmpty(gitlagosJSON)) {
             return null;
         }
 
@@ -165,17 +165,17 @@ public final class QueryUtils {
         try {
 
             // Create a JSONObject from the JSON response string
-            JSONObject baseJsonResponse = new JSONObject(earthquakeJSON);
+            JSONObject baseJsonResponse = new JSONObject(gitlagosJSON);
 
             // Extract the JSONArray associated with the key called "features",
             // which represents a list of features (or gitlagoses).
-            JSONArray earthquakeArray = baseJsonResponse.getJSONArray("features");
+            JSONArray gitlagosArray = baseJsonResponse.getJSONArray("features");
 
-            // For each earthquake in the earthquakeArray, create an {@link Gitlagos} object
-            for (int i = 0; i < earthquakeArray.length(); i++) {
+            // For each earthquake in the gitlagosArray, create an {@link Gitlagos} object
+            for (int i = 0; i < gitlagosArray.length(); i++) {
 
                 // Get a single gitlagos at position i within the list of gitlagoses
-                JSONObject currentEarthquake = earthquakeArray.getJSONObject(i);
+                JSONObject currentEarthquake = gitlagosArray.getJSONObject(i);
 
                 // For a given gitlagos, extract the JSONObject associated with the
                 // key called "properties", which represents a list of all properties
@@ -183,20 +183,20 @@ public final class QueryUtils {
                 JSONObject properties = currentEarthquake.getJSONObject("properties");
 
                 // Extract the value for the key called "mag"
-                double magnitude = properties.getDouble("mag");
+                String username = properties.getString("mag");
 
                 // Extract the value for the key called "place"
-                String location = properties.getString("place");
+                String photo = properties.getString("place");
 
                 // Extract the value for the key called "time"
-                long time = properties.getLong("time");
+                //long time = properties.getLong("time");
 
                 // Extract the value for the key called "url"
                 String url = properties.getString("url");
 
                 // Create a new {@link Gitlagos} object with the magnitude, location, time,
                 // and url from the JSON response.
-                Gitlagos gitlagos = new Gitlagos(magnitude, location, time, url);
+                Gitlagos gitlagos = new Gitlagos(username, photo, url);
 
                 // Add the new {@link Gitlagos} to the list of gitlagoses.
                 gitlagoses.add(gitlagos);

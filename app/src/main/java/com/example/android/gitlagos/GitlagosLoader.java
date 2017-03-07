@@ -58,7 +58,7 @@ public class GitlagosLoader extends AsyncTaskLoader<List<Gitlagos>> {
         }
 
         // Perform the network request, parse the response, and extract a list of gitlagoses.
-        List<Gitlagos> gitlagoses = QueryUtils.fetchEarthquakeData(mUrl);
+        List<Gitlagos> gitlagoses = QueryUtils.fetchGitlagosData(mUrl);
         return gitlagoses;
     }
 }

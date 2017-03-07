@@ -43,14 +43,14 @@ public class GitlagosActivity extends AppCompatActivity
     private static final String LOG_TAG = GitlagosActivity.class.getName();
 
     /** URL for earthquake data from the USGS dataset */
-    private static final String USGS_REQUEST_URL =
-            "http://earthquake.usgs.gov/fdsnws/event/1/query";
+    private static final String LSD_REQUEST_URL =
+            "https://api.github.com/search/users?q=repos:1 location:lagos";
 
     /**
      * Constant value for the earthquake loader ID. We can choose any integer.
      * This really only comes into play if you're using multiple loaders.
      */
-    private static final int EARTHQUAKE_LOADER_ID = 1;
+    private static final int GITLAGOS_LOADER_ID = 1;
 
     /** Adapter for the list of earthquakes */
     private GitlagosAdapter mAdapter;
@@ -110,7 +110,7 @@ public class GitlagosActivity extends AppCompatActivity
             // Initialize the loader. Pass in the int ID constant defined above and pass in null for
             // the bundle. Pass in this activity for the LoaderCallbacks parameter (which is valid
             // because this activity implements the LoaderCallbacks interface).
-            loaderManager.initLoader(EARTHQUAKE_LOADER_ID, null, this);
+            loaderManager.initLoader(GITLAGOS_LOADER_ID, null, this);
         } else {
             // Otherwise, display error
             // First, hide loading indicator so error message will be visible
@@ -135,7 +135,7 @@ public class GitlagosActivity extends AppCompatActivity
                 getString(R.string.settings_order_by_default)
         );
 
-        Uri baseUri = Uri.parse(USGS_REQUEST_URL);
+        Uri baseUri = Uri.parse(LSD_REQUEST_URL);
         Uri.Builder uriBuilder = baseUri.buildUpon();
 
         uriBuilder.appendQueryParameter("format", "geojson");

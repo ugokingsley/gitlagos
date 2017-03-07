@@ -21,61 +21,65 @@ package com.example.android.gitlagos;
 public class Gitlagos {
 
     /**
-     * Magnitude of the earthquake
+     * Github users' username
      */
-    private double mMagnitude;
+    //private double mUsername;
+    private String mUsername;
 
     /**
-     * Location of the earthquake
+     * Github users' username
      */
-    private String mLocation;
+    //private String mPhoto;
+    private String mPhoto;
 
     /**
      * Time of the earthquake
      */
-    private long mTimeInMilliseconds;
+    //private long mTimeInMilliseconds;
+
+
 
     /**
-     * Website URL of the earthquake
+     * Github users' profile url
      */
     private String mUrl;
 
     /**
      * Constructs a new {@link Gitlagos} object.
      *
-     * @param magnitude          is the magnitude (size) of the earthquake
-     * @param location           is the location where the earthquake happened
-     * @param timeInMilliseconds is the time in milliseconds (from the Epoch) when the
-     *                           earthquake happened
-     * @param url                is the website URL to find more details about the earthquake
+     * @param username          is the username of github users residing in lagos state, nigeria
+     * @param photo            is the profile photo of github users residing in lagos state, nigeria
+     *
+     * @param url                is the user profile url of github users residing in lagos state, nigeria
      */
-    public Gitlagos(double magnitude, String location, long timeInMilliseconds, String url) {
-        mMagnitude = magnitude;
-        mLocation = location;
-        mTimeInMilliseconds = timeInMilliseconds;
+    public Gitlagos(String username, String photo, String url) {
+        mUsername = username;
+        mPhoto = photo;
+        //mTimeInMilliseconds = timeInMilliseconds;
         mUrl = url;
     }
 
     /**
      * Returns the magnitude of the earthquake.
      */
-    public double getMagnitude() {
-        return mMagnitude;
+    public String getUsername() {
+        return mUsername;
     }
 
     /**
      * Returns the location of the earthquake.
      */
-    public String getLocation() {
-        return mLocation;
+    public String getPhoto() {
+        return mPhoto;
     }
 
     /**
      * Returns the time of the earthquake.
-     */
+
     public long getTimeInMilliseconds() {
         return mTimeInMilliseconds;
     }
+     */
 
     /**
      * Returns the website URL to find more information about the earthquake.
