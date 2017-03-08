@@ -171,42 +171,20 @@ public final class QueryUtils {
             // which represents a list of features (or gitlagoses).
             JSONArray gitlagosArray = baseJsonResponse.getJSONArray("items");
 
-            //
-            JSONObject gitlagosObject = gitlagosArray.getJSONObject(0);
-
-            // Extract the value for the key called "mag"
-            String username = gitlagosObject.getString("login");
-
-            // Extract the value for the key called "place"
-            String photo = gitlagosObject.getString("avatar_url");
-
-            // Extract the value for the key called "url"
-            String url = gitlagosObject.getString("html_url");
-
-
-            /**
             // For each earthquake in the gitlagosArray, create an {@link Gitlagos} object
-            for (int i = 0; i < gitlagosObject.length(); i++) {
+            for (int i = 0; i < gitlagosArray.length(); i++) {
 
                 // Get a single gitlagos at position i within the list of gitlagoses
-                JSONObject currentGitlagos = gitlagosArray.getJSONObject(i);
+                JSONObject gitlagosObject = gitlagosArray.getJSONObject(i);
 
-                // For a given gitlagos, extract the JSONObject associated with the
-                // key called "properties", which represents a list of all properties
-                // for that gitlagos.
-                JSONObject properties = currentGitlagos.getJSONObject("properties");
+                // Extract the value for the key called "login"
+                String username = gitlagosObject.getString("login");
 
-                // Extract the value for the key called "mag"
-                String username = properties.getString("mag");
+                // Extract the value for the key called "avatar_url"
+                String photo = gitlagosObject.getString("avatar_url");
 
-                // Extract the value for the key called "place"
-                String photo = properties.getString("place");
-
-                // Extract the value for the key called "time"
-                //long time = properties.getLong("time");
-
-                // Extract the value for the key called "url"
-                String url = properties.getString("url");
+                // Extract the value for the key called "html_url"
+                String url = gitlagosObject.getString("html_url");
 
                 // Create a new {@link Gitlagos} object with the magnitude, location, time,
                 // and url from the JSON response.
@@ -215,7 +193,7 @@ public final class QueryUtils {
                 // Add the new {@link Gitlagos} to the list of gitlagoses.
                 gitlagoses.add(gitlagos);
             }
-             */
+
 
 
         } catch (JSONException e) {
