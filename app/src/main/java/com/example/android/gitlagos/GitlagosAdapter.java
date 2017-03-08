@@ -74,7 +74,7 @@ public class GitlagosAdapter extends ArrayAdapter<Gitlagos> {
         // Find the TextView with view ID magnitude
         TextView magnitudeView = (TextView) listItemView.findViewById(R.id.magnitude);
         // Format the magnitude to show 1 decimal place
-        String formattedMagnitude = formatMagnitude(currentGitlagos.getMagnitude());
+        String formattedMagnitude = formatMagnitude(currentGitlagos.getPhoto());
         // Display the magnitude of the current earthquake in that TextView
         magnitudeView.setText(formattedMagnitude);
 
@@ -82,13 +82,13 @@ public class GitlagosAdapter extends ArrayAdapter<Gitlagos> {
         // Fetch the background from the TextView, which is a GradientDrawable.
         GradientDrawable magnitudeCircle = (GradientDrawable) magnitudeView.getBackground();
         // Get the appropriate background color based on the current earthquake magnitude
-        int magnitudeColor = getMagnitudeColor(currentGitlagos.getMagnitude());
+        //int magnitudeColor = getMagnitudeColor(currentGitlagos.getPhoto());
         // Set the color on the magnitude circle
-        magnitudeCircle.setColor(magnitudeColor);
+        //magnitudeCircle.setColor(magnitudeColor);
 
         // Get the original location string from the Gitlagos object,
         // which can be in the format of "5km N of Cairo, Egypt" or "Pacific-Antarctic Ridge".
-        String originalLocation = currentGitlagos.getLocation();
+        String originalLocation = currentGitlagos.getUrl();
 
         // If the original location string (i.e. "5km N of Cairo, Egypt") contains
         // a primary location (Cairo, Egypt) and a location offset (5km N of that city)
@@ -126,21 +126,21 @@ public class GitlagosAdapter extends ArrayAdapter<Gitlagos> {
         locationOffsetView.setText(locationOffset);
 
         // Create a new Date object from the time in milliseconds of the earthquake
-        Date dateObject = new Date(currentGitlagos.getTimeInMilliseconds());
+        //Date dateObject = new Date(currentGitlagos.getTimeInMilliseconds());
 
         // Find the TextView with view ID date
         TextView dateView = (TextView) listItemView.findViewById(R.id.date);
         // Format the date string (i.e. "Mar 3, 1984")
-        String formattedDate = formatDate(dateObject);
+        //String formattedDate = formatDate(dateObject);
         // Display the date of the current earthquake in that TextView
-        dateView.setText(formattedDate);
+        //dateView.setText(formattedDate);
 
         // Find the TextView with view ID time
         TextView timeView = (TextView) listItemView.findViewById(R.id.time);
         // Format the time string (i.e. "4:30PM")
-        String formattedTime = formatTime(dateObject);
+        //String formattedTime = formatTime(dateObject);
         // Display the time of the current earthquake in that TextView
-        timeView.setText(formattedTime);
+       // timeView.setText(formattedTime);
 
         // Return the list item view that is now showing the appropriate data
         return listItemView;
@@ -150,8 +150,8 @@ public class GitlagosAdapter extends ArrayAdapter<Gitlagos> {
      * Return the color for the magnitude circle based on the intensity of the earthquake.
      *
      * @param magnitude of the earthquake
-     */
-    private int getMagnitudeColor(double magnitude) {
+
+    private int getMagnitudeColor(String magnitude) {
         int magnitudeColorResourceId;
         int magnitudeFloor = (int) Math.floor(magnitude);
         switch (magnitudeFloor) {
@@ -190,12 +190,13 @@ public class GitlagosAdapter extends ArrayAdapter<Gitlagos> {
 
         return ContextCompat.getColor(getContext(), magnitudeColorResourceId);
     }
+     */
 
     /**
      * Return the formatted magnitude string showing 1 decimal place (i.e. "3.2")
      * from a decimal magnitude value.
      */
-    private String formatMagnitude(double magnitude) {
+    private String formatMagnitude(String magnitude) {
         DecimalFormat magnitudeFormat = new DecimalFormat("0.0");
         return magnitudeFormat.format(magnitude);
     }
