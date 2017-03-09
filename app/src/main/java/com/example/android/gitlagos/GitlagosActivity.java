@@ -1,18 +1,4 @@
-/*
- * Copyright (C) 2016 The Android Open Source Project
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *      http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
+
 package com.example.android.gitlagos;
 
 import android.app.LoaderManager;
@@ -44,7 +30,7 @@ public class GitlagosActivity extends AppCompatActivity
 
     /** URL for earthquake data from the USGS dataset */
     private static final String LSD_REQUEST_URL =
-            "https://api.github.com/search/users?q=repos:1 location:lagos";
+            "https://api.github.com/search/users?q=language:java location:lagos";
 
     /**
      * Constant value for the earthquake loader ID. We can choose any integer.
@@ -64,21 +50,21 @@ public class GitlagosActivity extends AppCompatActivity
         setContentView(R.layout.gitlagos_activity);
 
         // Find a reference to the {@link ListView} in the layout
-        ListView earthquakeListView = (ListView) findViewById(R.id.list);
+        ListView gitlagosListView = (ListView) findViewById(R.id.list);
 
         mEmptyStateTextView = (TextView) findViewById(R.id.empty_view);
-        earthquakeListView.setEmptyView(mEmptyStateTextView);
+        gitlagosListView.setEmptyView(mEmptyStateTextView);
 
         // Create a new adapter that takes an empty list of earthquakes as input
         mAdapter = new GitlagosAdapter(this, new ArrayList<Gitlagos>());
 
         // Set the adapter on the {@link ListView}
         // so the list can be populated in the user interface
-        earthquakeListView.setAdapter(mAdapter);
+        gitlagosListView.setAdapter(mAdapter);
 
         // Set an item click listener on the ListView, which sends an intent to a web browser
         // to open a website with more information about the selected earthquake.
-        earthquakeListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        gitlagosListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
                 // Find the current earthquake that was clicked on
@@ -122,7 +108,9 @@ public class GitlagosActivity extends AppCompatActivity
         }
     }
 
+
     @Override
+
     public Loader<List<Gitlagos>> onCreateLoader(int i, Bundle bundle) {
 
         SharedPreferences sharedPrefs = PreferenceManager.getDefaultSharedPreferences(this);
@@ -145,6 +133,7 @@ public class GitlagosActivity extends AppCompatActivity
 
         return new GitlagosLoader(this, uriBuilder.toString());
     }
+
 
     @Override
     public void onLoadFinished(Loader<List<Gitlagos>> loader, List<Gitlagos> gitlagoses) {
@@ -177,6 +166,7 @@ public class GitlagosActivity extends AppCompatActivity
         return true;
     }
 
+    /**
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
@@ -187,4 +177,5 @@ public class GitlagosActivity extends AppCompatActivity
         }
         return super.onOptionsItemSelected(item);
     }
+    */
 }
